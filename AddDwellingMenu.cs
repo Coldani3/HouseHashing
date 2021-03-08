@@ -30,14 +30,8 @@ namespace HouseHashing
 			{
 				string singleFloored = this.GetInputByIndex(4).ToLower();
 
-				if (singleFloored == "y")
-				{
-					singleFlooredBool = true;
-				}
-				else if (singleFloored == "n")
-				{
-					singleFlooredBool = false;
-				}
+				if (singleFloored == "y") singleFlooredBool = true;
+				else if (singleFloored == "n") singleFlooredBool = false;
 				else
 				{
 					this.ErrorMessage = "The value entered for Single Floored was not one of the accepted values!";
@@ -71,7 +65,7 @@ namespace HouseHashing
 		{
 			List<string> guaranteed = new List<string>() {"Post Code:", "Identifier:", "Householder Name:", "Residents (number only):"};
 			object data = Program.MenuManager.GetPersistentMenuData("housetype");
-			if (data != null && (HouseType) data == HouseType.House) guaranteed.Add("Single Floored? (Y/N)");
+			if (data != null && (HouseType) data == HouseType.House) guaranteed.Add("Single Floored? (Y/N):");
 			return guaranteed.ToArray();
 		}
 	}
