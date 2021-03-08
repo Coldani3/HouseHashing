@@ -7,6 +7,7 @@ namespace HouseHashing
 		public string HouseholderName { get; set; }
 		public int Residents { get; set; }
 		public bool SingleFloored { get => true; }
+		public HouseType Type { get => HouseType.Bungalow; }
 		public override int GetHashCode() => (PostCode + Identifier).GetHashCode();
 
 		public Bungalow(string postCode, string identifier)

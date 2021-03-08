@@ -7,6 +7,7 @@ namespace HouseHashing
 		string HouseholderName { get; }
 		int Residents { get; }
 		bool SingleFloored { get; }
+		HouseType Type { get; }
 		int GetHashCode();
 	}
 }

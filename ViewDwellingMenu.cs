@@ -18,12 +18,7 @@ namespace HouseHashing
 		public void Display()
 		{
 			Console.SetCursorPosition(0, 0);
-			//hacky and bad but can't think of better way :/
-			HouseType houseType;
-			
-			if (this.Dwelling is House) houseType = HouseType.House;
-			else if (this.Dwelling is Flat) houseType = HouseType.Flat;
-			else houseType = HouseType.Bungalow;
+			HouseType houseType = this.Dwelling.Type;
 
 			Console.WriteLine($"Type: {houseType}");
 			Console.WriteLine($"Postcode: {this.Dwelling.PostCode}");
