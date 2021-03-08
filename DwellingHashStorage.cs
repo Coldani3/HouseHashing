@@ -18,11 +18,8 @@ namespace HouseHashing
 			int hash = search.GetHashCode();
 			for (int i = 0; i < Size; i++)
 			{
-				IDwelling dwelling = this.Storage[hash];
-				if (dwelling.PostCode + dwelling.Identifier == search)
-				{
-					return dwelling;
-				}
+				IDwelling dwelling = this.Storage[(hash + i * i) % Size];
+				if (dwelling.PostCode + dwelling.Identifier == search) return dwelling;
 			}
 
 			return null;
@@ -49,8 +46,17 @@ namespace HouseHashing
 				if (Storage[tryHashLocation] == null) Storage[tryHashLocation] = dwelling;
 				else alreadyTriedHashes.Add(tryHashLocation);
 			}
+		}
 
-
+		public void DeleteDwelling(string search)
+		{
+			int hash = search.GetHashCode();
+			for (int i = 0; i < Size; i++)
+			{
+				int testingHash = (hash + i * i) % Size;
+				IDwelling dwelling = this.Storage[testingHash];
+				if (dwelling.PostCode + dwelling.Identifier == search) this.Storage[testingHash] = null;
+			}
 		}
 	}
 }

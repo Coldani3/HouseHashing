@@ -40,6 +40,21 @@ namespace HouseHashing
 
 		public void Display()
 		{
+			for (int i = 0; i < this.Options.Length; i++)
+			{
+				Console.SetCursorPosition(2, 2 + i);
+				if (i == this.SelectedIndex) 
+				{
+					Console.Write("> ");
+					Console.BackgroundColor = ConsoleColor.White;
+					Console.ForegroundColor = ConsoleColor.Black;
+				}
+				else Console.Write("  ");
+
+				Console.Write(this.Options[i]);
+				Console.BackgroundColor = ConsoleColor.Black;
+				Console.ForegroundColor = ConsoleColor.White;
+			}
 			
 		}
 	}

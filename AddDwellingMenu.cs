@@ -54,14 +54,16 @@ namespace HouseHashing
 		private static int[][] GetPositions()
 		{
 			List<int[]> guaranteed = new List<int[]>() {new int[] {2, 2}, new int[] {2, 4}, new int[] {2, 6}, new int[] {2, 8}};
-			if ((HouseType) Program.MenuManager.GetPersistentMenuData("housetype") == HouseType.House) guaranteed.Add(new int[] {2, 10});
+			object data = Program.MenuManager.GetPersistentMenuData("housetype");
+			if (data != null && (HouseType) data == HouseType.House) guaranteed.Add(new int[] {2, 10});
 			return guaranteed.ToArray();
 		}
 
 		private static string[] GetPreTextMessages()
 		{
 			List<string> guaranteed = new List<string>() {"Post Code:", "Identifier:", "Householder Name:", "Residents (number only):"};
-			if ((HouseType) Program.MenuManager.GetPersistentMenuData("housetype") == HouseType.House) guaranteed.Add("Single Floored? (Y/N)");
+			object data = Program.MenuManager.GetPersistentMenuData("housetype");
+			if (data != null && (HouseType) data == HouseType.House) guaranteed.Add("Single Floored? (Y/N)");
 			return guaranteed.ToArray();
 		}
 	}

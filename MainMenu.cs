@@ -11,13 +11,13 @@ namespace HouseHashing
 				"Delete Dwelling"
 			}, new Action[] {
 				() => {
-
+					Program.MenuManager.ChangeMenu(new SelectDwellingTypeMenu());
 				},
 				() => {
-
+					Program.MenuManager.ChangeMenu(new FindDwellingMenu());
 				},
 				() => {
-
+					Program.MenuManager.ChangeMenu(new DeleteDwellingMenu());
 				}
 			})
 		{

@@ -16,6 +16,7 @@ namespace HouseHashing
 		public void ChangeMenu(IMenu newMenu)
 		{
 			this.ActiveMenu = newMenu;
+			Program.Renderer.Render();
 		}
 
 		public void SetPersistentMenuData(string key, object data)
