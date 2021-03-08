@@ -5,10 +5,10 @@ namespace HouseHashing
 {
     class Program
     {
+		public static bool Running = true;
 		public static MenuManager MenuManager = new MenuManager();
 		public static Renderer Renderer = new Renderer();
 		public static DwellingHashStorage DwellingHashStorage = new DwellingHashStorage(113);
-		public static bool Running = true;
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
@@ -19,6 +19,7 @@ namespace HouseHashing
 			Task inputThread = new Task(() => {
 				MenuManager.ActiveMenu.OnInput(Console.ReadKey(true));
 				Renderer.Render();
+				System.Threading.Thread.Sleep(100);
 			});
 
 			while (Running);
