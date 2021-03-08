@@ -96,7 +96,7 @@ namespace HouseHashing
 		{
 			Console.CursorVisible = false;
 			Console.SetCursorPosition(0, 0);
-			Console.WriteLine(ErrorMessage.Length > 0 ? ErrorMessage : "Press Enter to submit and use arrow keys to navigate! \nPress Alt+] to exit!");
+			Console.WriteLine(ErrorMessage.Length > 0 ? ErrorMessage : "Press Enter to submit and use arrow keys to navigate! \nPress Alt+] to exit! Press Esc to close the program!");
 			for (int i = 0; i < this.InputAreas.Length; i++)
 			{
 				int[] coords = this.InputAreas[i].Item1;
