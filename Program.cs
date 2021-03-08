@@ -31,7 +31,7 @@ namespace HouseHashing
 				}
 				catch (Exception e)
 				{
-					Console.Clear();
+					Console.SetCursorPosition(0, 20);
 					Console.WriteLine(e.Message);
 					Console.WriteLine(e.StackTrace);
 				}

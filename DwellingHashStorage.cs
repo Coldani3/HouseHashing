@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace HouseHashing
@@ -15,10 +16,11 @@ namespace HouseHashing
 
 		public IDwelling GetDwelling(string search)
 		{
-			int hash = search.GetHashCode();
+			int hash = Math.Abs(search.GetHashCode());
 			for (int i = 0; i < Size; i++)
 			{
-				IDwelling dwelling = this.Storage[(hash + i * i) % Size];
+				int location = (hash + i * i) % Size;
+				IDwelling dwelling = this.Storage[location];
 				if (dwelling != null && dwelling.PostCode + dwelling.Identifier == search) return dwelling;
 			}
 
@@ -27,10 +29,10 @@ namespace HouseHashing
 
 		public void AddDwelling(IDwelling dwelling)
 		{
-			int hash = dwelling.GetHashCode();
+			int hash = Math.Abs(dwelling.GetHashCode());
 
 			//quadratic probing
-			for (int i = 0; i < this.Size - 1; i++)
+			for (int i = 0; i < this.Size; i++)
 			{
 				int tryHashLocation = (hash + i * i) % Size;
 
@@ -40,7 +42,7 @@ namespace HouseHashing
 
 		public void DeleteDwelling(string search)
 		{
-			int hash = search.GetHashCode();
+			int hash = Math.Abs(search.GetHashCode());
 			for (int i = 0; i < Size; i++)
 			{
 				int testingHash = (hash + i * i) % Size;
