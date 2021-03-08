@@ -18,7 +18,7 @@ namespace HouseHashing
 		public void Display()
 		{
 			Console.SetCursorPosition(0, 0);
-			//hacky and bad but can't think of better way :/
+			//hacky and bad but can't think of better way (without going against Task brief code we're forced to include) :/
 			HouseType houseType;
 			
 			if (this.Dwelling is House) houseType = HouseType.House;

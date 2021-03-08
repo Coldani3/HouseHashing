@@ -5,6 +5,7 @@ namespace HouseHashing
 	public class MenuManager
 	{
 		public IMenu ActiveMenu { get; private set; }
+		private IMenu PreviousMenu { get; set; }
 		//data saved between menus
 		private Dictionary<string, object> PersistentMenuData = new Dictionary<string, object>();
 
@@ -15,7 +16,9 @@ namespace HouseHashing
 
 		public void ChangeMenu(IMenu newMenu)
 		{
+			this.PreviousMenu = this.ActiveMenu;
 			this.ActiveMenu = newMenu;
+			System.Console.CursorVisible = false;
 			Program.Renderer.Render();
 		}
 
@@ -34,6 +37,11 @@ namespace HouseHashing
 		public void ClearPersistentMenuData()
 		{
 			this.PersistentMenuData.Clear();
+		}
+
+		public IMenu GetPreviousMenu()
+		{
+			return PreviousMenu;
 		}
 	}
 }
