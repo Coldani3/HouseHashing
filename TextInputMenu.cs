@@ -5,10 +5,11 @@ namespace HouseHashing
 {
 	public class TextInputMenu : IMenu
 	{
-		private Tuple<int[], string>[] InputAreas;
-		private string[] PreTextMessages;
+		protected Tuple<int[], string>[] InputAreas;
+		protected string[] PreTextMessages;
 		private int InputAreaIndex = 0;
 		private int CursorIndex = 0;
+		protected string ErrorMessage = "";
 
 		public TextInputMenu(int[][] inputAreas, string[] preTextMessages)
 		{
@@ -27,45 +28,70 @@ namespace HouseHashing
 			switch (input.Key)
 			{
 				case ConsoleKey.UpArrow:
-					if (InputAreaIndex - 1 >= 0) 
+					if (this.InputAreaIndex - 1 >= 0) 
 					{
-						InputAreaIndex--;
-						if (CursorIndex > InputAreas[InputAreaIndex].Item2.Length) CursorIndex = InputAreas[InputAreaIndex].Item2.Length;
+						this.InputAreaIndex--;
+						if (this.CursorIndex > this.InputAreas[this.InputAreaIndex].Item2.Length) this.CursorIndex = this.InputAreas[this.InputAreaIndex].Item2.Length;
 					}
 
 					break;
 				case ConsoleKey.DownArrow:
-					if (InputAreaIndex + 1 < InputAreas.Length) 
+					if (this.InputAreaIndex + 1 < this.InputAreas.Length) 
 					{
-						InputAreaIndex++;
-						if (CursorIndex > InputAreas[InputAreaIndex].Item2.Length) CursorIndex = InputAreas[InputAreaIndex].Item2.Length;
+						this.InputAreaIndex++;
+						if (CursorIndex > InputAreas[InputAreaIndex].Item2.Length) this.CursorIndex = this.InputAreas[this.InputAreaIndex].Item2.Length;
 					}
 					break;
 				//navigating in a text entry
 				case ConsoleKey.LeftArrow:
-					if (this.CursorIndex > 0) CursorIndex--;
+					if (this.CursorIndex > 0) this.CursorIndex--;
 					break;
 				case ConsoleKey.RightArrow:
-					if (this.CursorIndex <= InputAreas[InputAreaIndex].Item2.Length) CursorIndex++;
+					if (this.CursorIndex <= this.InputAreas[this.InputAreaIndex].Item2.Length) this.CursorIndex++;
 					break;
 				case ConsoleKey.Delete:
 					//you can't delete nothing
 					if (CursorIndex > 0) 
 					{
-						InputAreas[InputAreaIndex].Item2.Remove(CursorIndex - 1, 1);
+						this.InputAreas[this.InputAreaIndex].Item2.Remove(this.CursorIndex - 1, 1);
 						goto case ConsoleKey.LeftArrow;
 					}
 					break;
+				case ConsoleKey.Enter:
+					if (!this.Submit())
+					{
+						this.InputAreaIndex = 0;
+						this.CursorIndex = 0;
+
+						if (this.ErrorMessage == "")
+						{
+							this.ErrorMessage = "An unexpected error with your inputs was found! Check the types of the inputs and try again.";
+						}
+					}
+					break;
 				default:
-					InputAreas[InputAreaIndex].Item2.Insert(CursorIndex, input.KeyChar.ToString());
+					this.InputAreas[InputAreaIndex].Item2.Insert(this.CursorIndex, input.KeyChar.ToString());
 					goto case ConsoleKey.RightArrow;
 			}
 
 		}
 
+		public string GetInputByIndex(int inputAreaIndex)
+		{
+			return this.InputAreas[inputAreaIndex].Item2;
+		}
+
+		//NOTE: set ErrorMessage here to the appropriate message
+		public virtual bool Submit()
+		{
+			return true;
+		}
+
 		public void Display()
 		{
 			Console.CursorVisible = false;
+			Console.SetCursorPosition(0, 0);
+			Console.WriteLine(ErrorMessage.Length > 0 ? ErrorMessage : "Press Enter to submit and use arrow keys to navigate!");
 			for (int i = 0; i < this.InputAreas.Length; i++)
 			{
 				int[] coords = this.InputAreas[i].Item1;

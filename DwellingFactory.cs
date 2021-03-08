@@ -2,7 +2,7 @@ namespace HouseHashing
 {
 	public class DwellingFactory
 	{
-		public IDwelling GenerateDwelling(HouseType type, string postCode, string identifier, string householderName, int residents, bool singleFloored = true)
+		public static IDwelling GenerateDwelling(HouseType type, string postCode, string identifier, string householderName, int residents, bool singleFloored = true)
 		{
 			IDwelling result = null;
 			switch (type)
