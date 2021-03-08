@@ -3,7 +3,7 @@ namespace HouseHashing
 	public class FindDwellingMenu : TextInputMenu
 	{
 		public FindDwellingMenu() : base(
-			new int[][] {new int[] {2, 2}, new int[] {2,4}},
+			new int[][] {new int[] {2, 3}, new int[] {2, 5}},
 			new string[] {"Postcode:", "Identifier:"}
 		)
 		{

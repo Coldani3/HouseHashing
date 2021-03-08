@@ -13,7 +13,9 @@ namespace HouseHashing
 
 		public TextInputMenu(int[][] inputAreas, string[] preTextMessages)
 		{
+			this.PreTextMessages = new string[preTextMessages.Length];
 			this.InputAreas = new Tuple<int[], string>[inputAreas.Length];
+
 			for (int i = 0; i < inputAreas.Length; i++) 
 			{
 				this.InputAreas[i] = Tuple.Create<int[], string>(inputAreas[i], "");
@@ -25,6 +27,7 @@ namespace HouseHashing
 		{
 			//manual text editor stuff wooo
 			//can't wait for this to break horribly
+			string currString = this.InputAreas[this.InputAreaIndex].Item2;
 			switch (input.Key)
 			{
 				case ConsoleKey.UpArrow:
@@ -35,11 +38,14 @@ namespace HouseHashing
 					}
 
 					break;
+				case ConsoleKey.Tab:
+					if ((input.Modifiers & ConsoleModifiers.Shift) == ConsoleModifiers.Shift) goto case ConsoleKey.UpArrow;
+					else goto case ConsoleKey.DownArrow;
 				case ConsoleKey.DownArrow:
 					if (this.InputAreaIndex + 1 < this.InputAreas.Length) 
 					{
 						this.InputAreaIndex++;
-						if (CursorIndex > InputAreas[InputAreaIndex].Item2.Length) this.CursorIndex = this.InputAreas[this.InputAreaIndex].Item2.Length;
+						if (this.CursorIndex > this.InputAreas[this.InputAreaIndex].Item2.Length) this.CursorIndex = this.InputAreas[this.InputAreaIndex].Item2.Length;
 					}
 					break;
 				//navigating in a text entry
@@ -47,13 +53,13 @@ namespace HouseHashing
 					if (this.CursorIndex > 0) this.CursorIndex--;
 					break;
 				case ConsoleKey.RightArrow:
-					if (this.CursorIndex <= this.InputAreas[this.InputAreaIndex].Item2.Length) this.CursorIndex++;
+					if (this.CursorIndex < currString.Length) this.CursorIndex++;
 					break;
-				case ConsoleKey.Delete:
+				case ConsoleKey.Backspace:
 					//you can't delete nothing
-					if (CursorIndex > 0) 
+					if (this.CursorIndex > 0) 
 					{
-						this.InputAreas[this.InputAreaIndex].Item2.Remove(this.CursorIndex - 1, 1);
+						this.InputAreas[this.InputAreaIndex] = Tuple.Create(this.InputAreas[this.InputAreaIndex].Item1, currString.Remove(this.CursorIndex - 1, 1));
 						goto case ConsoleKey.LeftArrow;
 					}
 					break;
@@ -63,15 +69,14 @@ namespace HouseHashing
 						this.InputAreaIndex = 0;
 						this.CursorIndex = 0;
 
-						if (this.ErrorMessage == "")
-						{
-							this.ErrorMessage = "An unexpected error with your inputs was found! Check the types of the inputs and try again.";
-						}
+						if (this.ErrorMessage == "") this.ErrorMessage = "An unexpected error with your inputs was found! Check the types of the inputs and try again.";
 					}
 					break;
 				default:
-					this.InputAreas[InputAreaIndex].Item2.Insert(this.CursorIndex, input.KeyChar.ToString());
-					goto case ConsoleKey.RightArrow;
+					if (input.KeyChar == ']' && (input.Modifiers & ConsoleModifiers.Alt) == ConsoleModifiers.Alt) Program.MenuManager.ChangeMenu(Program.MenuManager.GetPreviousMenu());
+					this.InputAreas[InputAreaIndex] = Tuple.Create(this.InputAreas[this.InputAreaIndex].Item1, currString.Insert(this.CursorIndex, input.KeyChar.ToString()));
+					if (this.CursorIndex <= currString.Length) this.CursorIndex++;
+					break;
 			}
 
 		}
@@ -91,7 +96,7 @@ namespace HouseHashing
 		{
 			Console.CursorVisible = false;
 			Console.SetCursorPosition(0, 0);
-			Console.WriteLine(ErrorMessage.Length > 0 ? ErrorMessage : "Press Enter to submit and use arrow keys to navigate!");
+			Console.WriteLine(ErrorMessage.Length > 0 ? ErrorMessage : "Press Enter to submit and use arrow keys to navigate! \nPress Alt+] to exit!");
 			for (int i = 0; i < this.InputAreas.Length; i++)
 			{
 				int[] coords = this.InputAreas[i].Item1;
