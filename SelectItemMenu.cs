@@ -40,9 +40,12 @@ namespace HouseHashing
 
 		public void Display()
 		{
+			Console.SetCursorPosition(0, 0);
+			Console.Write("Use Arrow Keys to Navigate! \nPress Esc to close the program!");
+			
 			for (int i = 0; i < this.Options.Length; i++)
 			{
-				Console.SetCursorPosition(2, 2 + i);
+				Console.SetCursorPosition(2, 3 + i);
 				if (i == this.SelectedIndex) 
 				{
 					Console.Write("> ");
