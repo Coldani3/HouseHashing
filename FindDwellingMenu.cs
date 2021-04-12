@@ -14,7 +14,10 @@ namespace HouseHashing
 		{
 			IDwelling dwelling = Program.DwellingHashStorage.GetDwelling(this.GetInputByIndex(0) + this.GetInputByIndex(1));
 
-			if (dwelling != null) Program.MenuManager.ChangeMenu(new ViewDwellingMenu(dwelling));
+			if (dwelling != null) 
+			{
+				Program.MenuManager.ChangeMenu(new ViewDwellingMenu(dwelling));
+			}
 			else
 			{
 				this.ErrorMessage = "Could not find matching Dwelling!";

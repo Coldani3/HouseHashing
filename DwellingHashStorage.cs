@@ -21,7 +21,10 @@ namespace HouseHashing
 			{
 				int location = (hash + i * i) % Size;
 				IDwelling dwelling = this.Storage[location];
-				if (dwelling != null && dwelling.PostCode + dwelling.Identifier == search) return dwelling;
+				if (dwelling != null && dwelling.PostCode + dwelling.Identifier == search) 
+				{
+					return dwelling;
+				}
 			}
 
 			return null;
@@ -36,7 +39,10 @@ namespace HouseHashing
 			{
 				int tryHashLocation = (hash + i * i) % Size;
 
-				if (Storage[tryHashLocation] == null) Storage[tryHashLocation] = dwelling;
+				if (Storage[tryHashLocation] == null) 
+				{
+					Storage[tryHashLocation] = dwelling;
+				}
 			}
 		}
 
@@ -47,7 +53,11 @@ namespace HouseHashing
 			{
 				int testingHash = (hash + i * i) % Size;
 				IDwelling dwelling = this.Storage[testingHash];
-				if (dwelling != null && dwelling.PostCode + dwelling.Identifier == search) this.Storage[testingHash] = null;
+				
+				if (dwelling != null && dwelling.PostCode + dwelling.Identifier == search) 
+				{
+					this.Storage[testingHash] = null;
+				}
 			}
 		}
 	}

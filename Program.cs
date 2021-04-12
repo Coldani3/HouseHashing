@@ -24,9 +24,20 @@ namespace HouseHashing
 					while (Running)
 					{
 						ConsoleKeyInfo input = Console.ReadKey(true);
-						if (input.Key == ConsoleKey.Escape) Running = false;
-						if (ranOnce) MenuManager.ActiveMenu.OnInput(input);
-						else ranOnce = true;
+						if (input.Key == ConsoleKey.Escape) 
+						{
+							Running = false;
+						}
+
+						if (ranOnce) 
+						{
+							MenuManager.ActiveMenu.OnInput(input);
+						}
+						else 
+						{
+							ranOnce = true;
+						}
+						
 						Renderer.Render();
 						System.Threading.Thread.Sleep(100);
 					}

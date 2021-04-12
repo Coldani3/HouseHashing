@@ -27,10 +27,16 @@ namespace HouseHashing
 			switch (input.Key)
 			{
 				case ConsoleKey.DownArrow:
-					if (this.SelectedIndex + 1 < this.Options.Length) this.SelectedIndex++;
+					if (this.SelectedIndex + 1 < this.Options.Length) 
+					{
+						this.SelectedIndex++;
+					}
 					break;
 				case ConsoleKey.UpArrow:
-					if (this.SelectedIndex - 1 >= 0) this.SelectedIndex--;
+					if (this.SelectedIndex - 1 >= 0) 
+					{
+						this.SelectedIndex--;
+					}
 					break;
 				case ConsoleKey.Enter:
 					this.ActionsForIndex[this.SelectedIndex]();
@@ -52,7 +58,10 @@ namespace HouseHashing
 					Console.BackgroundColor = ConsoleColor.White;
 					Console.ForegroundColor = ConsoleColor.Black;
 				}
-				else Console.Write("  ");
+				else 
+				{
+					Console.Write("  ");
+				}
 
 				Console.Write(this.Options[i]);
 				Console.BackgroundColor = ConsoleColor.Black;

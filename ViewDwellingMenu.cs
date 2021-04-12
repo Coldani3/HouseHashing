@@ -12,7 +12,10 @@ namespace HouseHashing
 
 		public void OnInput(ConsoleKeyInfo input)
 		{
-			if (input.Key == ConsoleKey.Enter) Program.MenuManager.ChangeMenu(new MainMenu());
+			if (input.Key == ConsoleKey.Enter) 
+			{
+				Program.MenuManager.ChangeMenu(new MainMenu());
+			}
 		}
 
 		public void Display()

@@ -21,17 +21,23 @@ namespace HouseHashing
 			bool singleFlooredBool = true;
 
 			if (!Int32.TryParse(residents, out residentsNum))
-				{
-					this.ErrorMessage = "The string entered into Residents was not a number!";
-					return false;
-				}
+			{
+				this.ErrorMessage = "The string entered into Residents was not a number!";
+				return false;
+			}
 
 			if (this.InputAreas.Length > 4)
 			{
 				string singleFloored = this.GetInputByIndex(4).ToLower();
 
-				if (singleFloored == "y") singleFlooredBool = true;
-				else if (singleFloored == "n") singleFlooredBool = false;
+				if (singleFloored == "y") 
+				{
+					singleFlooredBool = true;
+				}
+				else if (singleFloored == "n")
+				{
+					singleFlooredBool = false;
+				}
 				else
 				{
 					this.ErrorMessage = "The value entered for Single Floored was not one of the accepted values!";
@@ -57,7 +63,12 @@ namespace HouseHashing
 		{
 			List<int[]> guaranteed = new List<int[]>() {new int[] {2, 3}, new int[] {2, 5}, new int[] {2, 7}, new int[] {2, 9}};
 			object data = Program.MenuManager.GetPersistentMenuData("housetype");
-			if (data != null && (HouseType) data == HouseType.House) guaranteed.Add(new int[] {2, 11});
+
+			if (data != null && (HouseType) data == HouseType.House) 
+			{
+				guaranteed.Add(new int[] {2, 11});
+			}
+
 			return guaranteed.ToArray();
 		}
 
@@ -65,7 +76,10 @@ namespace HouseHashing
 		{
 			List<string> guaranteed = new List<string>() {"Post Code:", "Identifier:", "Householder Name:", "Residents (number only):"};
 			object data = Program.MenuManager.GetPersistentMenuData("housetype");
-			if (data != null && (HouseType) data == HouseType.House) guaranteed.Add("Single Floored? (Y/N):");
+			if (data != null && (HouseType) data == HouseType.House) 
+			{
+				guaranteed.Add("Single Floored? (Y/N):");
+			}
 			return guaranteed.ToArray();
 		}
 	}

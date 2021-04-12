@@ -24,14 +24,26 @@ namespace HouseHashing
 
 		public void SetPersistentMenuData(string key, object data)
 		{
-			if (!this.PersistentMenuData.ContainsKey(key)) this.PersistentMenuData.Add(key, data);
-			else this.PersistentMenuData[key] = data;
+			if (!this.PersistentMenuData.ContainsKey(key)) 
+			{
+				this.PersistentMenuData.Add(key, data);
+			}
+			else 
+			{
+				this.PersistentMenuData[key] = data;
+			}
 		}
 
 		public object GetPersistentMenuData(string key)
 		{
-			if (this.PersistentMenuData.ContainsKey(key)) return this.PersistentMenuData[key];
-			else return null;
+			if (this.PersistentMenuData.ContainsKey(key))
+			{
+				return this.PersistentMenuData[key];
+			}
+			else 
+			{
+				return null;
+			}
 		}
 
 		public void ClearPersistentMenuData()
